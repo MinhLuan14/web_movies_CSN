@@ -1,0 +1,139 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('../assets/img/banner.png');
+    min-height: 10vh;
+}
+
+.glass-container {
+    background-color: rgba(red, green, blue, alpha);
+
+}
+
+.input-group {
+    width: 85%;
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px 15px;
+    border-radius: 12px;
+    border: none;
+    outline: none;
+}
+
+.form-login {
+    width: 380px;
+    height: 65%;
+    border-radius: 35px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
+    background-color: rgba(13, 18, 31, 0.85);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.glass-container img {
+    width: 200px;
+    height: 150px;
+}
+
+input[type="email"],
+input[type="password"],
+.submit-btn {
+    width: 100%;
+    padding: 12px 15px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+.icon-social a {
+    margin: 0 15px;
+}
+
+.fa-google {
+    color: #DB4437;
+    font-size: 24px;
+    transition: 0.3s;
+}
+
+.fa-facebook {
+    color: #1877F2;
+    font-size: 24px;
+    transition: 0.3s;
+}
+
+.fa-twitter {
+    color: #1DA1F2;
+    font-size: 24px;
+    transition: all 0.3s ease;
+}
+
+
+.fa-google:hover,
+.fa-facebook:hover,
+.fa-twitter:hover {
+    transform: translateY(-3px);
+    filter: drop-shadow(0 0 10px currentColor);
+}
+
+.remember-forgot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 85%;
+    margin: 10px;
+    color: white;
+    font-size: 13px;
+}
+
+.remember-forgot a {
+    text-decoration: none;
+    color: black;
+}
+
+.btn-login {
+    width: 85%;
+    padding: 12px 25px;
+    border-radius: 25px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 16px;
+    border: none;
+}
+
+.btn-login:hover {
+    box-shadow: 0 0 20px rgba(255, 140, 0, 0.6);
+    transform: translateY(-2px);
+    /* Nhích nhẹ lên tạo cảm giác nhấn */
+    background: linear-gradient(45deg, #FF8C00, #FFD700);
+}
+
+.register-link {
+    margin-bottom: 10px;
+}
+
+.register-link a {
+    margin: 15px 0px;
+    text-decoration: none;
+    color: #1877F2;
+    font-size: 14px;
+}

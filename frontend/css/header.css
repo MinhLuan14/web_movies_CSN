@@ -1,0 +1,141 @@
+header {
+    height: 70px;
+    background-color: transparent;
+    transition: all 0.4s ease-in-out;
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+    font-family: 'Montserrat', sans-serif;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+header.scrolled {
+    background-color: rgba(5, 10, 24, 0.95);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+}
+
+#sidebar {
+    position: relative;
+    z-index: 1001;
+
+}
+
+#sidebar .sub-sidebar {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+}
+
+#sidebar .sub-sidebar i.menu-toggle {
+    padding: 10px 20px;
+}
+
+#sidebar .sub-sidebar li {
+    margin-left: 20px;
+}
+
+#sidebar .sub-sidebar li a {
+    text-decoration: none;
+    color: #ffff;
+    font-weight: bold;
+}
+
+#sidebar .sub-sidebar .icon-menu {
+    position: absolute;
+    top: 48px;
+    left: 0px;
+    background-color: #0D121F;
+    width: 200px;
+    border-bottom-right-radius: 15px;
+    list-style: none;
+    padding: 10px 0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    transform: translateY(-10px);
+}
+
+.icon-menu.active {
+    display: grid !important;
+    place-items: center;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: translateY(0) !important;
+    z-index: 9999 !important;
+}
+
+#sidebar .sub-sidebar .icon-menu li {
+    padding: 0 10px;
+    align-items: center;
+    width: 100%;
+    margin: 12px 0;
+}
+
+#sidebar .sub-sidebar .icon-menu li span {
+    margin: 0 10px;
+}
+
+#sidebar .sub-sidebar .icon-menu img {
+    width: 200px;
+    height: 150px;
+}
+
+#sidebar .sub-sidebar .icon-menu li i {
+    padding: 0 !important;
+    font-size: 20px;
+    margin: 20px 0;
+    color: #fff;
+}
+
+#sidebar .sub-sidebar li i:hover {
+    color: #FFD700;
+    /* Màu vàng từ logo */
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+    transform: scale(1.2);
+}
+
+#logo-center {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    pointer-events: none;
+    z-index: 1;
+}
+
+#logo-center img {
+    width: 125px;
+    height: 100px;
+    object-fit: contain;
+}
+
+#btn button {
+    float: right;
+    margin-right: 20px;
+    padding: 5px 10px;
+    border-radius: 5px;
+    background: linear-gradient(to right, #FFD700, #FF8C00);
+    border: none;
+    font-weight: bold;
+}
+
+#btn button a {
+    text-decoration: none;
+    color: aliceblue;
+}
+
+#btn button a:hover {
+    background: #FFD700;
+    /* Đổi màu cả nút */
+    transform: scale(1.05);
+    /* Phóng to nhẹ 1 chút cho chuyên nghiệp */
+    transition: 0.3s;
+}

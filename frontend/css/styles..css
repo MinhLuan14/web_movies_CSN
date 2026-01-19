@@ -1,0 +1,26 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg-color: #050A18;
+    --sidebar-color: #0D121F;
+    --accent-yellow: #FFD700;
+    --accent-blue: #1E90FF;
+    --highlight-red: #E50914;
+    --text-main: #FFFFFF;
+}
+
+body {
+    background-color: var(--accent-blue);
+    color: var(--text-main);
+    font-family: 'Montserrat', sans-serif;
+}
+
+#content {
+    min-height: calc(100vh - 150px);
+    margin-top: 70px;
+
+}
