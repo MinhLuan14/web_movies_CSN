@@ -10,6 +10,7 @@
     background-size: cover;
     background-position: center top;
     transition: background-image 0.8s ease-in-out;
+    background-repeat: no-repeat;
     display: flex;
     align-items: center;
     border-radius: 30px;
@@ -98,7 +99,6 @@
     text-decoration: none;
 }
 
-.movie-section {}
 
 .section-title {
     margin: 10px 0;
@@ -360,7 +360,7 @@
 
 #now-showing-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+
     gap: 25px;
 }
 
@@ -404,7 +404,7 @@
         margin: 70px 20px 0 20px;
         /* Top 60px, Right 20px, Bottom 0, Left 20px */
         height: 400px;
-        /* Giảm chiều cao banner trên mobile */
+        background-position: 70% center;
         border-radius: 20px;
     }
 
@@ -464,22 +464,57 @@
 }
 
 @media (max-width: 480px) {
+
     .hero-banner {
-        height: 300px;
-        margin: 70px 15px 0 15px;
+        height: 350px;
+        /* Banner ngắn lại để không chiếm hết màn hình */
+        background-position: center center;
+    }
+
+    /* Ẩn mô tả phim như Luân đã chốt */
+    #slider-desc {
+        display: none;
+    }
+
+    .banner-content {
+        padding-left: 20px;
+        bottom: 40px;
+        /* Đẩy nội dung xuống sát đáy banner một chút */
     }
 
     #slider-title {
+        font-size: 1.5rem;
+        max-width: 100%;
+    }
+
+    .banner-content p {
+        display: none;
+    }
+
+    /* 2. Thu nhỏ tiêu đề để không bị chiếm quá nhiều dòng */
+    #slider-title {
         font-size: 1.4rem;
+        margin-bottom: 10px;
+        line-height: 1.2;
+        max-width: 90%;
+        /* Tránh chữ sát mép quá */
     }
 
-    .movie-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
+    /* 3. Căn chỉnh lại nội dung banner */
+    .banner-content {
+        padding-left: 20px;
+        padding-right: 15px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
     }
 
-    .movie-card img {
-        height: 180px;
-        /* Card siêu nhỏ cho màn hình nhỏ */
+    /* 4. Thu nhỏ nút bấm để cân đối với tiêu đề */
+    .btn-play {
+        padding: 8px 18px;
+        font-size: 0.85rem;
+        width: fit-content;
+        /* Nút chỉ to bằng nội dung bên trong */
+        margin-top: 5px;
     }
 }
