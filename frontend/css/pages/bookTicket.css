@@ -275,6 +275,25 @@
     border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
+.seat.sold {
+    background-color: #444 !important;
+    /* Màu xám tối */
+    cursor: not-allowed;
+    position: relative;
+    opacity: 0.6;
+}
+
+/* Hiệu ứng gạch chéo cho ghế đã bán */
+.seat.sold::after {
+    content: 'X';
+    color: #888;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 10px;
+}
+
 /* ================= RESPONSIVE CHO TRANG ĐẶT VÉ ================= */
 
 @media (max-width: 1024px) {
@@ -352,10 +371,9 @@
         padding: 10px;
     }
 
-    /* Cố định nhãn hàng (A, B, C) để khi cuộn ghế vẫn thấy hàng */
     .row-labels {
         display: none;
-        /* Hoặc Luân có thể giữ lại nhưng sẽ cần xử lý JS phức tạp hơn */
+
     }
 
     .seat-legend {
@@ -363,7 +381,6 @@
         gap: 15px;
     }
 
-    /* Thanh toán: Chuyển sang dạng dọc */
     .checkout-bar {
         width: 100%;
         bottom: 0;

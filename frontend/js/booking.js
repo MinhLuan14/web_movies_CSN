@@ -6,21 +6,20 @@ const seatsGrid = document.getElementById('seats-grid');
 const rowLabels = document.getElementById('row-labels');
 const btnCheckout = document.getElementById('btn-checkout');
 
+// --- HÀM MỚI: Lấy danh sách ghế đã bán từ LocalStorage ---
+function getBookedSeats() {
+    const booked = localStorage.getItem('allBookedSeats');
+    return booked ? JSON.parse(booked) : [];
+}
+
 function initBooking() {
-    // 1. LẤY DỮ LIỆU TỪ LOCALSTORAGE (Thay vì lấy từ URL)
     const savedData = localStorage.getItem('pendingTicket');
     const titleElement = document.getElementById('booking-movie-title');
-
-    // Tìm các phần tử hiển thị rạp và thông tin thêm
     const movieSubInfo = document.querySelector('.movie-sub-info');
 
     if (savedData) {
         const ticket = JSON.parse(savedData);
-
-        // Hiển thị tên phim
         if (titleElement) titleElement.innerText = ticket.title || ticket.movieTitle;
-
-        // Cập nhật rạp và giờ chiếu vào thanh sub-info
         if (movieSubInfo) {
             movieSubInfo.innerHTML = `
                 <span><i class="fas fa-film"></i> ${ticket.genres || '2D'}</span>
@@ -31,10 +30,7 @@ function initBooking() {
                 <span class="age-tag">T13</span>
             `;
         }
-    } else {
-        if (titleElement) titleElement.innerText = "Thông tin đặt vé trống";
     }
-
     renderSeats();
 }
 
@@ -43,42 +39,45 @@ function renderSeats() {
     rowLabels.innerHTML = '';
     seatsGrid.innerHTML = '';
 
+    // Lấy danh sách ghế đã có người đặt
+    const bookedSeats = getBookedSeats();
+
     rows.forEach((row) => {
         const label = document.createElement('span');
         label.innerText = row;
         rowLabels.appendChild(label);
 
         for (let i = 1; i <= cols; i++) {
-            // Dòng J chỉ lấy 7 ghế đôi (vì ghế đôi chiếm 2 ô)
             if (row === 'J' && i > 7) continue;
 
             const seat = document.createElement('div');
             seat.classList.add('seat');
 
-            let type = 'standard';
-            if (row === 'J') {
-                type = 'double';
-            } else if (row >= 'F') {
-                type = 'vip';
-            }
-
+            let type = (row === 'J') ? 'double' : (row >= 'F' ? 'vip' : 'standard');
             seat.classList.add(type);
             seat.dataset.price = prices[type];
 
             // Đặt tên ghế
-            if (type === 'double') {
-                seat.dataset.name = `${row}${i * 2 - 1}-${i * 2}`;
+            const seatName = (type === 'double') ? `${row}${i * 2 - 1}-${i * 2}` : `${row}${i}`;
+            seat.dataset.name = seatName;
+
+            // --- KIỂM TRA GHẾ ĐÃ BÁN ---
+            if (bookedSeats.includes(seatName)) {
+                seat.classList.add('sold'); // Thêm class sold
             } else {
-                seat.dataset.name = `${row}${i}`;
+                // Chỉ thêm sự kiện click nếu ghế chưa bán
+                seat.addEventListener('click', () => toggleSeat(seat));
             }
 
-            seat.addEventListener('click', () => toggleSeat(seat));
             seatsGrid.appendChild(seat);
         }
     });
 }
 
 function toggleSeat(seat) {
+    // Không cho chọn nếu ghế đã bán (phòng hờ)
+    if (seat.classList.contains('sold')) return;
+
     seat.classList.toggle('selecting');
     updateTotal();
 }
@@ -99,36 +98,38 @@ function updateTotal() {
     totalPriceEl.innerText = total.toLocaleString('vi-VN') + 'đ';
     seatNamesEl.innerText = names.length > 0 ? names.join(', ') : 'Chưa có';
 
-    if (names.length > 0) {
-        btnCheckout.disabled = false;
-        btnCheckout.style.opacity = "1";
-    } else {
-        btnCheckout.disabled = true;
-        btnCheckout.style.opacity = "0.5";
-    }
+    btnCheckout.disabled = names.length === 0;
+    btnCheckout.style.opacity = names.length === 0 ? "0.5" : "1";
 }
 
 if (btnCheckout) {
     btnCheckout.addEventListener('click', () => {
         const selectedElements = document.querySelectorAll('.seat.selecting');
-        const selectedSeats = Array.from(selectedElements).map(s => ({
+        const selectedNames = Array.from(selectedElements).map(s => s.dataset.name);
+        const selectedData = Array.from(selectedElements).map(s => ({
             name: s.dataset.name,
             price: s.dataset.price
         }));
 
-        // Hợp nhất dữ liệu cũ và dữ liệu ghế mới
+        // 1. Cập nhật vào danh sách ghế ĐÃ BÁN vĩnh viễn
+        const bookedSeats = getBookedSeats();
+        const updatedBookedSeats = [...bookedSeats, ...selectedNames];
+        localStorage.setItem('allBookedSeats', JSON.stringify(updatedBookedSeats));
+
+        // 2. Lưu thông tin vé hiện tại để sang trang thanh toán
         const oldTicket = JSON.parse(localStorage.getItem('pendingTicket')) || {};
         const finalBooking = {
             ...oldTicket,
-            selectedSeats: selectedSeats,
+            selectedSeats: selectedData,
             totalPrice: document.getElementById('total-price').innerText,
             bookingAt: new Date().toLocaleString()
         };
 
         localStorage.setItem('finalBooking', JSON.stringify(finalBooking));
+
+        // Chuyển trang
         window.location.href = 'payment.html';
     });
 }
 
-// Khởi tạo khi load trang
 initBooking();

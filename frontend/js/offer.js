@@ -1,14 +1,14 @@
 const promoImages = [
-    '/assets/img/tickets/compo1.png',
-    '/assets/img/tickets/compo2.png',
-    '/assets/img/tickets/compo3.png',
-    '/assets/img/tickets/compoalone.png',
-    '/assets/img/tickets/popcine.png',
-    '/assets/img/tickets/roomvip.png',
-    '/assets/img/tickets/ticket50.png',
-    '/assets/img/tickets/ticketgol.png',
-    '/assets/img/tickets/ticketstudents.png',
-    '/assets/img/tickets/tsicketsnack.png'
+    '/assets/img/offers/compo1.png',
+    '/assets/img/offers/compo2.png',
+    '/assets/img/offers/compo3.png',
+    '/assets/img/offers/compoalone.png',
+    '/assets/img/offers/popcine.png',
+    '/assets/img/offers/roomvip.png',
+    '/assets/img/offers/ticket50.png',
+    '/assets/img/offers/ticketgol.png',
+    '/assets/img/offers/ticketstudents.png',
+    '/assets/img/offers/tsicketsnack.png'
 ];
 
 let currentHeroIndex = 0;
