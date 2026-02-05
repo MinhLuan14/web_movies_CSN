@@ -100,8 +100,25 @@
 
 
 .section-title {
-    margin: 10px 0;
+    margin: 30px 0 20px;
     text-align: center;
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #f59e0b;
+    /* đen xanh sang hơn #000 */
+    position: relative;
+}
+
+/* Gạch nhấn phía dưới */
+.section-title::after {
+    content: "";
+    display: block;
+    width: 180px;
+    height: 4px;
+    margin: 10px auto 0;
+    background: linear-gradient(90deg, #f59e0b, #ef4444);
+    border-radius: 2px;
 }
 
 .movie-grid {
