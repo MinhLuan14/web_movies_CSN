@@ -303,69 +303,123 @@
     box-shadow: 0 5px 15px rgba(229, 9, 20, 0.4);
 }
 
-.promo-section {
-    padding: 20px 0 50px;
-}
-
 .promo-container {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+    padding: 30px 0;
+    width: 100%;
 }
 
 .promo-card {
-    flex: 1;
-    min-width: 280px;
-    padding: 25px;
-    border-radius: 15px;
-    color: white;
     position: relative;
+    isolation: isolate;
+    width: 100%;
+    height: 250px;
+    border-radius: 18px;
     overflow: hidden;
+    cursor: pointer;
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: 0 15px 35px rgba(251, 125, 8, 0.2);
+    border-color: rgba(251, 125, 8, 0.4);
+    transition:
+        transform 0.45s cubic-bezier(0.165, 0.84, 0.44, 1),
+        box-shadow 0.45s ease;
+}
+
+/* Hiệu ứng mượt khi di chuột */
+.promo-card:hover {
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: 0 15px 35px rgba(251, 125, 8, 0.2);
+    border-color: rgba(251, 125, 8, 0.4);
+    z-index: 10;
+}
+
+.promo-img-auto {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scale(1);
+    transition: transform 1s ease;
+    z-index: 1;
+}
+
+.promo-card:hover .promo-img-auto {
+    transform: scale(1.1);
+    /* Ảnh zoom nhẹ khi hover */
+}
+
+/* Lớp phủ Glow sang trọng hơn */
+.promo-glow {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(251, 125, 8, 0.15), transparent 60%);
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* Thêm vào .promo-card */
+.promo-card::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -150%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(to right,
+            transparent,
+            rgba(255, 255, 255, 0.2),
+            transparent);
+    transform: skewX(-25deg);
+    transition: 0.7s;
+    z-index: 3;
+}
+
+.promo-card:hover::after {
+    left: 150%;
+    /* Vệt sáng chạy từ trái sang phải */
+}
+
+/* Responsive mượt mà */
+@media (max-width: 1100px) {
+    .promo-container {
+        grid-template-columns: repeat(2, 1fr);
+        /* Màn hình vừa: 2 cột x 2 hàng */
+    }
+}
+
+@media (max-width: 600px) {
+    .promo-container {
+        grid-template-columns: 1fr;
+        /* Màn hình nhỏ: 1 cột đứng */
+        gap: 15px;
+    }
+
+    .promo-card {
+        height: 180px;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(1.05);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Hover nhẹ để khách muốn click */
+.promo-card:hover {
+    transform: scale(1.02);
     transition: 0.3s;
     cursor: pointer;
 }
 
-.promo-card:hover {
-    transform: scale(1.03);
-}
-
-.promo-card.gold {
-    background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
-}
-
-.promo-card.red {
-    background: linear-gradient(135deg, #ff0844 0%, #ffb199 100%);
-}
-
-.promo-card.blue {
-    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-}
-
-.promo-card span {
-    display: block;
-    font-size: 1.5rem;
-    font-weight: 800;
-    margin-bottom: 5px;
-}
-
-.promo-card p {
-    font-size: 0.9rem;
-    opacity: 0.9;
-}
-
-.promo-card::after {
-    content: '';
-    position: absolute;
-    right: -20px;
-    bottom: -20px;
-    width: 100px;
-    height: 100px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 50%;
-}
-
-#now-showing-grid {
+promo-section #now-showing-grid {
     display: grid;
 
     gap: 25px;
@@ -400,6 +454,18 @@
 #coming-soon-grid .btn-book-now {
     background: #333;
     cursor: not-allowed;
+}
+
+@media (max-width: 900px) {
+    .promo-container {
+        flex-direction: column;
+    }
+
+    .promo-card,
+    .promo-card:nth-child(2) {
+        width: 100%;
+        height: 200px;
+    }
 }
 
 @media (max-width: 1210px) {
@@ -482,9 +548,7 @@
         width: 100%;
     }
 
-    .promo-container {
-        margin: 0 20px;
-    }
+
 }
 
 @media (max-width: 480px) {
