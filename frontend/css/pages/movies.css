@@ -5,12 +5,13 @@ main {
 }
 
 .hero-slider {
-    width: 100%;
+    width: auto;
     height: 450px;
     margin-bottom: 30px;
     border-radius: 20px;
     overflow: hidden;
     position: relative;
+
 }
 
 .banner-slide-content {
@@ -63,7 +64,9 @@ main {
     margin-bottom: 40px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     flex-wrap: wrap;
-    /* Tự xuống dòng trên điện thoại */
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 20px;
 }
 
 /* Nhóm Tìm kiếm */
@@ -189,24 +192,6 @@ optgroup {
     border-radius: 5px;
 }
 
-/* Responsive cho Mobile */
-@media (max-width: 768px) {
-    .filter-wrapper {
-        flex-direction: column;
-        align-items: stretch;
-    }
-
-    .filter-group {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-    }
-
-    #all-movies-grid {
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-        gap: 15px;
-    }
-}
-
 .movie-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
@@ -226,4 +211,91 @@ optgroup {
 .movie-card img:hover {
     transform: scale(1.05);
     cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .hero-slider {
+        height: 350px;
+
+    }
+
+    .banner-slide-content {
+        padding: 30px;
+        /* Giảm padding để text không bị chiếm quá nhiều chỗ */
+    }
+
+    .banner-text h1 {
+        font-size: 2rem;
+    }
+
+    /* Ép lưới phim luôn đều 2 hoặc 3 cột tùy màn hình */
+    #all-movies-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .hero-slider {
+        height: 250px;
+
+    }
+
+    .banner-text h1 {
+        font-size: 1.5rem;
+    }
+
+    /* 2. Bộ lọc (Filter): Chuyển thành hàng dọc hoàn toàn */
+    .filter-wrapper {
+        padding: 15px;
+        margin: 15px 15px 30px 15px;
+    }
+
+    .search-group {
+        min-width: 100%;
+    }
+
+    .filter-group {
+        grid-template-columns: 1fr;
+        /* Mỗi select nằm 1 hàng */
+        width: 100%;
+    }
+
+    .filter-group select {
+        width: 100%;
+        /* Giãn ra hết cỡ cho dễ bấm */
+    }
+
+    /* 3. Lưới phim (Grid): Thu nhỏ card để hiện được nhiều hơn */
+    #all-movies-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        padding: 0 15px;
+    }
+
+    .movie-card img {
+        height: 200px;
+        /* Card phim nhỏ hơn ở bản mobile */
+    }
+
+    #movie-page-title {
+        font-size: 1.5rem;
+        margin: 15px 15px 20px 15px;
+    }
+
+    /* 4. Phân trang (Pagination): Rút gọn nút bấm */
+    .pagination {
+        gap: 10px;
+    }
+
+    .pg-btn {
+        padding: 8px 12px;
+        font-size: 0.8rem;
+    }
+
+    .pg-btn span {
+        display: none;
+        /* Ẩn chữ "Previous/Next" chỉ để lại icon */
+    }
 }

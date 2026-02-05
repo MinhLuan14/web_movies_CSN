@@ -1,11 +1,15 @@
 @import "../base/variables.css";
 
+* {
+    box-sizing: border-box;
+}
+
 #footer {
     display: flex;
     justify-content: space-around;
     background-color: var(--color-dark);
     gap: 30px;
-    padding: 10px 0;
+    padding: 20px 0;
     flex-wrap: wrap;
 }
 
@@ -40,40 +44,45 @@
     color: var(--text-muted);
 }
 
-/* --- RESPONSIVE CHO TABLET (iPad Air, iPad Mini...) --- */
+/* Tablet */
 @media (max-width: 1024px) {
     #footer {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 40px;
-        padding: 50px 40px;
-        align-items: start;
-    }
-
-    .footer-column {
-        min-width: unset;
-        text-align: left;
-    }
-
-    .footer-logo {
-        grid-column: 1 / -1;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        padding-bottom: 20px;
-        margin-bottom: 10px;
+        grid-template-columns: repeat(3, 1fr);
+        padding: 20px 20px;
     }
 }
 
+/* Mobile */
+@media (max-width: 768px) {
+    #footer {
+        grid-template-columns: repeat(2, 1fr);
+        /* Chia 2 cột */
+    }
+}
+
+/* Mobile nhỏ (480px) */
 @media (max-width: 500px) {
     #footer {
         grid-template-columns: 1fr;
+        /* 1 cột duy nhất */
         text-align: center;
+        gap: 30px;
     }
 
-    .footer-logo {
-        border-bottom: none;
+    .footer-column {
+        align-items: center;
+        /* Căn giữa mọi thứ trong cột */
     }
 
-    .sub-icon {
-        justify-content: center;
+    .footer-logo img {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        padding-bottom: 20px;
+        margin-bottom: 10px;
+        margin-left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .sub-icon li i {
+        margin-right: 5px;
     }
 }

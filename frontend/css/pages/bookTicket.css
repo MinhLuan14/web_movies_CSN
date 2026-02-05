@@ -274,3 +274,116 @@
     display: inline-block;
     border: 1px solid rgba(255, 255, 255, 0.05);
 }
+
+/* ================= RESPONSIVE CHO TRANG ĐẶT VÉ ================= */
+
+@media (max-width: 1024px) {
+    .booking-container {
+        padding-top: 100px;
+        max-width: 95%;
+    }
+
+    .matrix-outer {
+        padding: 30px;
+    }
+
+    /* Cho phép sơ đồ ghế cuộn ngang trên tablet nếu quá rộng */
+    .matrix-container {
+        overflow-x: auto;
+        padding-bottom: 15px;
+        justify-content: flex-start;
+        /* Để sơ đồ không bị mất lề khi cuộn */
+    }
+}
+
+@media (max-width: 768px) {
+    .movie-header-info h2 {
+        font-size: 1.5rem;
+    }
+
+    .selected-summary {
+        gap: 20px;
+    }
+
+    .checkout-bar {
+        padding: 15px 20px;
+    }
+
+    /* Thu nhỏ kích thước ghế một chút */
+    .seats-grid {
+        grid-template-columns: repeat(14, 28px);
+        gap: 8px;
+    }
+
+    .seat {
+        width: 28px;
+        height: 24px;
+    }
+
+    .seat.double {
+        width: 64px;
+    }
+}
+
+@media (max-width: 500px) {
+    .booking-page {
+        padding-bottom: 160px;
+        /* Tăng khoảng cách để không bị Checkout bar che mất footer */
+    }
+
+    .movie-sub-info {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    /* Sơ đồ ghế cực kỳ quan trọng trên mobile */
+    .matrix-outer {
+        padding: 20px 10px;
+        width: 100%;
+        border-radius: 15px;
+    }
+
+    .matrix-container {
+        /* Hiện thanh cuộn rõ ràng để người dùng biết là cuộn được */
+        overflow-x: scroll;
+        display: block;
+        /* Chuyển về block để scroll hoạt động tốt trên mobile */
+        white-space: nowrap;
+        padding: 10px;
+    }
+
+    /* Cố định nhãn hàng (A, B, C) để khi cuộn ghế vẫn thấy hàng */
+    .row-labels {
+        display: none;
+        /* Hoặc Luân có thể giữ lại nhưng sẽ cần xử lý JS phức tạp hơn */
+    }
+
+    .seat-legend {
+        flex-wrap: wrap;
+        gap: 15px;
+    }
+
+    /* Thanh toán: Chuyển sang dạng dọc */
+    .checkout-bar {
+        width: 100%;
+        bottom: 0;
+        border-radius: 20px 20px 0 0;
+        transform: translateX(-50%);
+    }
+
+    .checkout-content {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .selected-summary {
+        width: 100%;
+        justify-content: space-between;
+        gap: 10px;
+    }
+
+    .btn-confirm {
+        width: 100%;
+        justify-content: center;
+    }
+}

@@ -198,3 +198,109 @@
     color: #fb7d08;
     margin-right: 5px;
 }
+
+/* ================= RESPONSIVE VÉ CỦA TÔI ================= */
+
+/* Cho màn hình Tablet (Dưới 1024px) */
+@media (max-width: 1024px) {
+    .tickets-grid {
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+        gap: 20px;
+    }
+
+    .tickets-header h1 {
+        font-size: 2.2rem;
+    }
+}
+
+/* Cho màn hình điện thoại lớn (Dưới 768px) */
+@media (max-width: 768px) {
+    .tickets-page-content {
+        padding: 80px 15px 40px;
+        /* Giảm padding hai bên */
+    }
+
+    .ticket-card {
+        height: auto;
+        /* Cho phép thẻ co giãn theo nội dung */
+        min-height: 200px;
+    }
+
+    .ticket-poster {
+        width: 120px;
+        /* Thu nhỏ poster */
+    }
+
+    .ticket-qr {
+        width: 130px;
+        /* Thu nhỏ phần QR */
+        padding: 15px;
+    }
+
+    .ticket-qr img {
+        width: 80px;
+        height: 80px;
+    }
+
+    .cut-out {
+        right: 118px;
+        /* Cập nhật lại vị trí khớp với độ rộng QR mới */
+    }
+}
+
+/* Cho màn hình điện thoại nhỏ (Dưới 600px) */
+@media (max-width: 600px) {
+    .tickets-header h1 {
+        font-size: 1.8rem;
+    }
+
+    .ticket-card {
+        flex-direction: column;
+        /* Xếp chồng các phần lên nhau */
+        text-align: center;
+    }
+
+    /* Poster nằm trên cùng */
+    .ticket-poster {
+        width: 100%;
+        height: 180px;
+    }
+
+    .ticket-poster img {
+        border-radius: 20px 20px 0 0;
+    }
+
+    /* Thông tin ở giữa */
+    .ticket-info {
+        border-right: none;
+        border-bottom: 2px dashed rgba(255, 255, 255, 0.1);
+        padding: 20px;
+        align-items: center;
+        /* Căn giữa nội dung */
+    }
+
+    .ticket-status {
+        margin: 0 auto 12px;
+    }
+
+    .ticket-time-group {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    /* QR nằm dưới cùng */
+    .ticket-qr {
+        width: 100%;
+        border-radius: 0 0 20px 20px;
+        padding: 25px;
+    }
+
+    /* Ẩn các lỗ khoét vì giao diện dọc không cần dùng */
+    .cut-out {
+        display: none;
+    }
+
+    .ticket-id {
+        margin-top: 10px;
+    }
+}
