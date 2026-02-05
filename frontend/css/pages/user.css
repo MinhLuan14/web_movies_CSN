@@ -1,30 +1,58 @@
+/* --- Root Variables --- */
+:root {
+    --primary-color: #fb7d08;
+    --primary-hover: #e06c00;
+    --bg-dark: #0b0f1a;
+    --card-bg: #161b28;
+    --text-main: #ffffff;
+    --text-muted: #94a3b8;
+    --border-color: #2d3446;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+/* --- Layout chính --- */
 .user-page {
-    padding: 120px 5% 60px;
-    background: #0b0f1a;
+    padding: 120px 0 60px;
     min-height: 100vh;
-    color: white;
 }
 
 .user-container {
-    display: grid;
-    grid-template-columns: 300px 1fr;
-    gap: 30px;
     max-width: 1200px;
     margin: 0 auto;
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 30px;
+    padding: 0 20px;
 }
 
-/* Sidebar */
+/* --- Sidebar --- */
 .user-sidebar {
-    background: #1a1f2e;
-    border-radius: 15px;
+    background: var(--card-bg);
+    border-radius: 20px;
     padding: 30px;
     height: fit-content;
-    border: 1px solid #2d3446;
+    border: 1px solid var(--border-color);
+    position: sticky;
+    top: 100px;
 }
 
 .user-profile {
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 25px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border-color);
 }
 
 .avatar-wrapper {
@@ -34,117 +62,406 @@
     margin: 0 auto 15px;
 }
 
-.avatar-wrapper img {
+#user-avatar {
     width: 100%;
     height: 100%;
     border-radius: 50%;
     object-fit: cover;
-    border: 3px solid #fb7d08;
+    border: 3px solid var(--primary-color);
 }
 
 .edit-avatar {
     position: absolute;
     bottom: 0;
     right: 0;
-    background: #fb7d08;
-    width: 30px;
-    height: 30px;
+    background: var(--primary-color);
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    transition: var(--transition);
 }
 
-.user-nav a {
-    display: block;
+.user-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.nav-link,
+.logout-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
     padding: 12px 15px;
-    color: #cbd5e1;
+    color: var(--text-muted);
     text-decoration: none;
-    border-radius: 8px;
-    margin-bottom: 5px;
-    transition: 0.3s;
+    border-radius: 10px;
+    transition: var(--transition);
+    font-size: 0.95rem;
 }
 
-.user-nav a.active,
-.user-nav a:hover {
+.nav-link:hover,
+.nav-link.active {
     background: rgba(251, 125, 8, 0.1);
-    color: #fb7d08;
+    color: var(--primary-color);
 }
 
-/* Content Card */
+.nav-link.active {
+    font-weight: 600;
+}
+
+.logout-link {
+    color: #ff4d4d;
+    margin-top: 10px;
+}
+
+.logout-link:hover {
+    background: rgba(255, 77, 77, 0.1);
+}
+
+.nav-divider {
+    border: 0;
+    border-top: 1px solid var(--border-color);
+    margin: 10px 0;
+}
+
+/* --- Content Area --- */
+.tab-content {
+    display: none;
+    animation: fadeIn 0.4s ease;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 .content-card {
-    background: #1a1f2e;
-    padding: 25px;
-    border-radius: 15px;
-    margin-bottom: 25px;
-    border: 1px solid #2d3446;
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 35px;
+    border: 1px solid var(--border-color);
 }
 
 .content-card h3 {
-    margin-bottom: 20px;
-    color: #fb7d08;
-    border-left: 4px solid #fb7d08;
+    margin-bottom: 25px;
+    border-left: 4px solid var(--primary-color);
     padding-left: 15px;
 }
 
 .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 
 .form-group label {
     display: block;
     margin-bottom: 8px;
-    color: #94a3b8;
+    color: var(--text-muted);
     font-size: 0.9rem;
 }
 
 .form-group input {
     width: 100%;
-    padding: 12px;
+    padding: 12px 15px;
     background: #0b0f1a;
-    border: 1px solid #2d3446;
-    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
     color: white;
+    outline: none;
 }
 
 .btn-save {
-    background: #fb7d08;
+    background: var(--primary-color);
     color: white;
     border: none;
     padding: 12px 25px;
-    border-radius: 8px;
-    font-weight: bold;
+    border-radius: 10px;
+    font-weight: 600;
     cursor: pointer;
-    transition: 0.3s;
+    transition: var(--transition);
 }
 
-.btn-save:hover {
-    background: #e66d00;
-}
-
-/* Recent Tickets */
-.recent-ticket-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px;
-    background: #0b0f1a;
+/* Accordion Support */
+.legal-item {
+    border: 1px solid var(--border-color);
     border-radius: 10px;
     margin-bottom: 10px;
 }
 
-.ticket-mini-info strong {
-    display: block;
-    color: #fff;
+.legal-header {
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
 }
 
-.ticket-mini-info span {
-    font-size: 0.8rem;
+.legal-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: 0.3s ease;
+    padding: 0 15px;
+    color: var(--text-muted);
+}
+
+.legal-item.active .legal-body {
+    max-height: 200px;
+    padding-bottom: 15px;
+}
+
+.support-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.btn-contact {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    color: white;
+    text-decoration: none;
+    border: 1px solid var(--border-color);
+}
+
+/* --- TICKET HISTORY STYLES --- */
+.ticket-history-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.ticket-item {
+    display: flex;
+    background: #0b0f1a;
+    border: 1px solid var(--border-color);
+    border-radius: 15px;
+    overflow: hidden;
+    position: relative;
+    transition: var(--transition);
+}
+
+.ticket-item:hover {
+    border-color: var(--primary-color);
+    transform: translateX(5px);
+}
+
+/* Phần Poster */
+.ticket-poster {
+    width: 120px;
+    height: 160px;
+    flex-shrink: 0;
+}
+
+.ticket-poster img {
+    width: 100%;
+    height: 135%;
+    object-fit: cover;
+}
+
+/* Phần Thông tin */
+.ticket-info {
+    padding: 20px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.ticket-id {
+    font-size: 0.75rem;
+    color: var(--primary-color);
+    text-transform: uppercase;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.movie-title {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    color: white;
+}
+
+.ticket-info p {
+    margin: 3px 0;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.ticket-info i {
+    width: 18px;
+    color: var(--primary-color);
+}
+
+/* Phần trạng thái */
+.ticket-status-wrapper {
+    padding: 20px;
+    border-left: 2px dashed var(--border-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 140px;
+}
+
+/* Hiệu ứng đục lỗ cuống vé */
+.ticket-status-wrapper::before,
+.ticket-status-wrapper::after {
+    content: '';
+    position: absolute;
+    left: 110px;
+    /* Khớp với vị trí đường dashed */
+    width: 20px;
+    height: 20px;
+    background: var(--card-bg);
+    /* Trùng màu nền Content Card */
+    border-radius: 50%;
+}
+
+.ticket-status-wrapper::before {
+    top: -10px;
+}
+
+.ticket-status-wrapper::after {
+    bottom: -10px;
+}
+
+.status-badge {
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.status-badge.used {
+    background: #2d3446;
     color: #94a3b8;
 }
 
-.ticket-mini-price {
-    color: #fb7d08;
-    font-weight: bold;
+.status-badge.coming {
+    background: rgba(40, 167, 69, 0.2);
+    color: #28a745;
+}
+
+.ticket-price {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: white;
+}
+
+/* Responsive cho vé */
+@media (max-width: 600px) {
+    .ticket-item {
+        flex-direction: column;
+    }
+
+    .ticket-poster {
+        width: 100%;
+        height: 150px;
+    }
+
+    .ticket-status-wrapper {
+        border-left: none;
+        border-top: 2px dashed var(--border-color);
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 15px 20px;
+    }
+
+    .ticket-status-wrapper::before,
+    .ticket-status-wrapper::after {
+        display: none;
+    }
+}
+
+/* --- RESPONSIVE FIX --- */
+
+@media (max-width: 1024px) {
+    .user-container {
+        grid-template-columns: 280px 1fr;
+        gap: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .user-container {
+        display: block;
+        /* Quan trọng: Hủy Grid để không bị bể */
+    }
+
+    .user-sidebar {
+        position: static;
+        margin-bottom: 20px;
+        padding: 20px;
+    }
+
+    .user-profile {
+        display: flex;
+        text-align: left;
+        align-items: center;
+        gap: 15px;
+        border-bottom: none;
+        margin-bottom: 15px;
+    }
+
+    .avatar-wrapper {
+        margin: 0;
+        width: 60px;
+        height: 60px;
+    }
+
+    /* Menu ngang mượt như App */
+    .user-nav {
+        flex-direction: row;
+        overflow-x: auto;
+        padding-bottom: 5px;
+        scrollbar-width: none;
+    }
+
+    .user-nav::-webkit-scrollbar {
+        display: none;
+    }
+
+    .nav-link {
+        flex: 0 0 auto;
+        white-space: nowrap;
+        background: rgba(255, 255, 255, 0.03);
+    }
+
+    .nav-divider {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .content-card {
+        padding: 20px;
+    }
+
+    .support-buttons {
+        grid-template-columns: 1fr;
+    }
+
+    .user-profile {
+        flex-direction: column;
+        text-align: center;
+    }
 }
